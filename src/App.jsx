@@ -9,7 +9,7 @@ import {
 } from './utils.js';
 
 const s = {
-  root: { background: '#0f172a', color: '#e2e8f0', minHeight: '100vh', fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif", display:'flex', flexDirection:'column' },
+  root: { background: '#0f172a', color: '#e2e8f0', minHeight: '100vh', width:'100%', fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif", display:'flex', flexDirection:'column' },
 
   loginWrap:{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', minHeight:'100vh', padding:'2rem' },
   loginBox:{ background:'#1e293b', borderRadius:16, padding:'2rem', width:'100%', maxWidth:360, border:'1px solid #334155' },
@@ -722,6 +722,12 @@ function PengaturanPage() {
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(() => sessionStorage.getItem('gas_logged') === '1');
   const [view, setView] = useState('dashboard');
+
+  useEffect(() => {
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.background = '#0f172a';
+  }, []);
 
   if (!loggedIn) return <LoginPage onLogin={() => setLoggedIn(true)} />;
 
