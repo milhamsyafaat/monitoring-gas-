@@ -87,19 +87,14 @@ function LoginPage({ onLogin }) {
   const [attempts, setAttempts] = useState(0);
   const [lockout, setLockout] = useState(0);
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (Date.now() < lockout) {
       const s = Math.ceil((lockout - Date.now()) / 1000);
       setErr(`Terlalu banyak percobaan. Coba lagi ${s} detik`);
       return;
     }
     if (!user || user !== 'admin') { setErr('Username salah'); return; }
-    const ok = await checkPassword(pw);
-    if (ok) {
-      setAttempts(0);
-      sessionStorage.setItem('gas_logged', '1');
-      onLogin();
-    } else {
+    if (!checkPassword(pw)) {
       const a = attempts + 1;
       setAttempts(a);
       if (a >= 5) {
@@ -109,13 +104,17 @@ function LoginPage({ onLogin }) {
       } else {
         setErr(`Password salah (${a}/5 percobaan)`);
       }
+    } else {
+      setAttempts(0);
+      sessionStorage.setItem('gas_logged', '1');
+      onLogin();
     }
   };
 
-  const handleSetup = async () => {
+  const handleSetup = () => {
     if (!newPw || newPw.length < 4) { setErr('Minimal 4 karakter'); return; }
     if (newPw !== confirmPw) { setErr('Konfirmasi tidak cocok'); return; }
-    await setPassword(newPw);
+    setPassword(newPw);
     sessionStorage.setItem('gas_logged', '1');
     onLogin();
   };
@@ -630,10 +629,10 @@ function PengaturanPage() {
     setTimeout(() => setStokMsg(''), 2000);
   };
 
-  const changePw = async () => {
+  const changePw = () => {
     if (!pw || pw.length < 4) { setPwMsg('Minimal 4 karakter'); return; }
     if (pw !== pwConfirm) { setPwMsg('Konfirmasi tidak cocok'); return; }
-    await setPassword(pw);
+    setPassword(pw);
     setPw(''); setPwConfirm('');
     setPwMsg('Password diganti');
     setTimeout(() => setPwMsg(''), 2000);

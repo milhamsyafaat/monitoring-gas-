@@ -30,28 +30,26 @@ function save(key, data) {
 }
 
 // Auth
-async function hashPassword(pw) {
-  const enc = new TextEncoder().encode(pw);
-  const buf = await crypto.subtle.digest('SHA-256', enc);
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+function hashPassword(pw) {
+  let h = 5381;
+  for (let i = 0; i < pw.length; i++) h = ((h << 5) + h) + pw.charCodeAt(i);
+  return 'h' + Math.abs(h).toString(36);
 }
 
-export async function setPassword(pw) {
-  save(AUTH_KEY, { password: await hashPassword(pw), hashed: 1 });
+export function setPassword(pw) {
+  save(AUTH_KEY, { password: hashPassword(pw), hashed: 1 });
 }
-export async function getPassword() {
-  const stored = load(AUTH_KEY, { password: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', hashed: 1 });
+export function getPassword() {
+  const stored = load(AUTH_KEY, { password: hashPassword('admin123'), hashed: 1 });
   if (!stored.hashed) {
-    stored.password = await hashPassword(stored.password);
+    stored.password = hashPassword(stored.password);
     stored.hashed = 1;
     save(AUTH_KEY, stored);
   }
   return stored;
 }
-export async function checkPassword(pw) {
-  const stored = await getPassword();
-  const inputHash = await hashPassword(pw);
-  return stored.password === inputHash;
+export function checkPassword(pw) {
+  return getPassword().password === hashPassword(pw);
 }
 
 // Harga
