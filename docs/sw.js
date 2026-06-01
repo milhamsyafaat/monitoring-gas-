@@ -1,4 +1,4 @@
-const CACHE = 'gasmonitor-v1';
+const CACHE = 'gasmonitor-v2';
 const ASSETS = [
   './',
   './index.html',
