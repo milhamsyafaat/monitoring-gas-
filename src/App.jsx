@@ -78,7 +78,6 @@ const NAV = [
 ];
 
 function LoginPage({ onLogin }) {
-  const [user, setUser] = useState('');
   const [pw, setPw] = useState('');
   const [err, setErr] = useState('');
   const [showSetup, setShowSetup] = useState(false);
@@ -93,7 +92,6 @@ function LoginPage({ onLogin }) {
       setErr(`Terlalu banyak percobaan. Coba lagi ${s} detik`);
       return;
     }
-    if (!user || user !== 'admin') { setErr('Username salah'); return; }
     if (!checkPassword(pw)) {
       const a = attempts + 1;
       setAttempts(a);
@@ -126,8 +124,7 @@ function LoginPage({ onLogin }) {
         <div style={s.loginSub}>Monitoring stok & keuangan gas 3kg</div>
         {!showSetup ? (
           <>
-            <input style={s.inp} placeholder="Username" value={user} onChange={e => { setUser(e.target.value); setErr(''); }} autoFocus />
-            <input style={s.inp} type="password" placeholder="Password" value={pw} onChange={e => { setPw(e.target.value); setErr(''); }} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            <input style={s.inp} type="password" placeholder="Password" autoFocus value={pw} onChange={e => { setPw(e.target.value); setErr(''); }} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
             {err && <div style={{color:'#ef4444',fontSize:12,marginBottom:8}}>{err}</div>}
             <button style={s.btnBlock} onClick={handleLogin}>Masuk</button>
             <div style={{textAlign:'center',marginTop:12}}>
