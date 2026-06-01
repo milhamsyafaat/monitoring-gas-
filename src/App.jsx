@@ -120,8 +120,24 @@ function LoginPage({ onLogin }) {
   return (
     <div style={s.loginWrap}>
       <div style={s.loginBox}>
-        <div style={s.loginTitle}>GasMonitor</div>
-        <div style={s.loginSub}>Monitoring stok & keuangan gas 3kg</div>
+        <div style={{textAlign:'center',marginBottom:16}}>
+          <svg width="48" height="48" viewBox="0 0 100 100" style={{display:'block',margin:'0 auto 8px'}}>
+            <rect width="100" height="100" rx="20" fill="#1e293b"/>
+            <rect x="28" y="22" width="44" height="52" rx="8" fill="#38bdf8"/>
+            <rect x="34" y="28" width="32" height="40" rx="4" fill="#0f172a"/>
+            <rect x="40" y="74" width="20" height="6" rx="2" fill="#475569"/>
+            <rect x="36" y="34" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="54" y="34" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="36" y="42" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="54" y="42" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="36" y="50" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="54" y="50" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="36" y="58" width="10" height="4" rx="2" fill="#38bdf8"/>
+            <rect x="54" y="58" width="10" height="4" rx="2" fill="#38bdf8"/>
+          </svg>
+          <div style={s.loginTitle}>GasMonitor</div>
+          <div style={s.loginSub}>Monitoring stok & keuangan gas 3kg</div>
+        </div>
         {!showSetup ? (
           <>
             <input style={s.inp} type="password" placeholder="Password" autoFocus value={pw} onChange={e => { setPw(e.target.value); setErr(''); }} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
