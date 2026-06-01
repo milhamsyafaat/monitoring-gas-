@@ -1,7 +1,9 @@
-const CACHE = 'gasmonitor-v3';
+const CACHE = 'gasmonitor-v4';
 const ASSETS = [
   './manifest.json',
   './favicon.svg',
+  './icon-192.png',
+  './icon-512.png',
 ];
 
 self.addEventListener('install', (e) => {
