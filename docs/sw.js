@@ -1,7 +1,5 @@
-const CACHE = 'gasmonitor-v2';
+const CACHE = 'gasmonitor-v3';
 const ASSETS = [
-  './',
-  './index.html',
   './manifest.json',
   './favicon.svg',
 ];
@@ -22,7 +20,13 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   if (e.request.url.startsWith('chrome-extension://')) return;
-  e.respondWith(
-    caches.match(e.request).then((r) => r || fetch(e.request).catch(() => caches.match('./index.html')))
-  );
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match('./index.html'))
+    );
+  } else {
+    e.respondWith(
+      caches.match(e.request).then((r) => r || fetch(e.request).catch(() => caches.match('./index.html')))
+    );
+  }
 });
