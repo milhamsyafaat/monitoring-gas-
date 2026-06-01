@@ -135,7 +135,7 @@ function LoginPage({ onLogin }) {
             <rect x="36" y="58" width="10" height="4" rx="2" fill="#38bdf8"/>
             <rect x="54" y="58" width="10" height="4" rx="2" fill="#38bdf8"/>
           </svg>
-          <div style={s.loginTitle}>GasMonitor</div>
+          <div style={s.loginTitle}>GasFlow</div>
           <div style={s.loginSub}>Monitoring stok & keuangan gas 3kg</div>
         </div>
         {!showSetup ? (
@@ -509,7 +509,7 @@ function RiwayatPage() {
     const fileUrl = URL.createObjectURL(blob);
     try {
       await navigator.share({
-        title: 'Riwayat GasMonitor',
+        title: 'Riwayat GasFlow',
         text: `Riwayat gas ${filter} — ${today()}`,
         files: [new File([blob], `riwayat-gas-${today()}.csv`, { type:'text/csv' })],
       });

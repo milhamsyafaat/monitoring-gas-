@@ -1,6 +1,6 @@
 {
-  "name": "GasMonitor",
-  "short_name": "GasMonitor",
+  "name": "GasFlow",
+  "short_name": "GasFlow",
   "description": "Aplikasi monitoring stok dan keuangan gas",
   "start_url": "./",
   "display": "standalone",

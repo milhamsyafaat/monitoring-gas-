@@ -1,6 +1,6 @@
 {
   "appId": "com.gasmonitor.app",
-  "appName": "GasMonitor",
+  "appName": "GasFlow",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {

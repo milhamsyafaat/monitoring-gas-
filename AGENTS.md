@@ -1,4 +1,4 @@
-# GasMonitor — Monitoring Stok & Keuangan Gas 3kg
+# GasFlow — Monitoring Stok & Keuangan Gas 3kg
 
 React + Vite PWA untuk mencatat stok gas, pengiriman, penjualan, modal, dan profit. Data di localStorage — zero backend.
 
